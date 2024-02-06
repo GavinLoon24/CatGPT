@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cat GPT</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>Cat GPT</h1>
+    <h2>Nika.eco employees love cat!</h2>
+  </header>
+  <main>
+
+    <div class="content">
+      <form method="post" onsubmit="submit.disabled=true; showLoadingMessage()">
+        <br>
+        <center><textarea name="question" placeholder="Type your question here." rows="3" cols="150"></textarea></center>
+        <!-- Increase the value of "rows" to make the textarea longer -->
+        <br>
+        <input type="submit" value="Submit" id="submit">
+      </form>
+      <div id="loading" style="display: none;"><b>Waiting for response...</b></div>
+    </div>
+
+    <div class="dia">
+      {% for entry in conversation %}
+      <div class="result">
+        <div class="question"><b>Cat Lover :3:</b>
+          <pre>{{ entry.question }}</pre>
+        </div>
+        <hr>
+        <div class="response"><b>Cat GPT:</b>
+          {% if entry.response.endswith('.jpg') or entry.response.endswith('.jpeg') or entry.response.endswith('.png') %}
+            <img src="{{ entry.response }}" alt="Cat Photo" style="max-width: 100%; height: auto;">
+          {% else %}
+            <pre>{{ entry.response }}</pre>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+
+  </main>
+  <script>
+    function showLoadingMessage() {
+      document.getElementById('loading').style.display = 'block';
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
